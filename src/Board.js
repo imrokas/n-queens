@@ -138,7 +138,7 @@
     // test if any major diagonals on this board contain conflicts
     hasAnyMajorDiagonalConflicts: function() {
       var length = this.get('n');
-      for (var i = -Math.ceil(length / 2); i < length; i++){
+      for (var i = -Math.min(length-2); i < length; i++){
         if (this.hasMajorDiagonalConflictAt(i)) return true;
       }
       return false;
@@ -184,7 +184,7 @@
     // test if any minor diagonals on this board contain conflicts
     hasAnyMinorDiagonalConflicts: function() {
       var length = this.get('n');
-      length = length + Math.ceil(length / 2);
+      length = length + Math.max(length - 2);
       for (var i = 0; i < length; i++){
         if (this.hasMinorDiagonalConflictAt(i)) return true;
       }
