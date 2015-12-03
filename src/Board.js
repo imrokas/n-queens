@@ -86,8 +86,8 @@
 
     // test if any rows on this board contain conflicts
     hasAnyRowConflicts: function() {
-      var board = this.rows();
-      for (var i = 0; i < board.length; i++) {
+      var length = this.get('n');
+      for (var i = 0; i < length; i++) {
         if (this.hasRowConflictAt(i)) return true;
       }
       return false;
@@ -100,9 +100,12 @@
     //
     // test if a specific column on this board contains a conflict
     hasColConflictAt: function(colIndex) {
-      return this.rows().reduce(function(acc,row){
-        return acc + row[colIndex];
-      },0) > 1;
+      var length = this.get('n'),
+          accu = 0;
+      for(var i = 0; i < length; i++) {
+        accu += this.get(i)[colIndex];
+      }
+      return accu > 1;
     },
 
     // test if any columns on this board contain conflicts
@@ -121,13 +124,14 @@
     //
     // test if a specific major diagonal on this board contains a conflict
     hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
-      var self = this;
-      return this.rows().reduce(function(acc,row,i){
-        if (self._isInBounds(i,majorDiagonalColumnIndexAtFirstRow)) {
-          return acc + row[majorDiagonalColumnIndexAtFirstRow++];
+      var length = this.get('n'),
+          accu = 0;
+      for(var row = 0; row < length; row++) {
+        if(this._isInBounds(row, majorDiagonalColumnIndexAtFirstRow)) {
+          accu += this.get(row)[majorDiagonalColumnIndexAtFirstRow++];
         }
-        return acc;
-      },0) > 1;
+      }
+      return accu > 1;
     },
 
     // test if any major diagonals on this board contain conflicts
@@ -145,13 +149,14 @@
     //
     // test if a specific minor diagonal on this board contains a conflict
     hasMinorDiagonalConflictAt: function(minorDiagonalColumnIndexAtFirstRow) {
-      var self = this;
-      return this.rows().reduce(function(acc,row,i){
-        if (self._isInBounds(i,minorDiagonalColumnIndexAtFirstRow)) {
-          return acc + row[minorDiagonalColumnIndexAtFirstRow--];
+      var length = this.get('n'),
+          accu = 0;
+      for(var row = 0; row < length; row++) {
+        if(this._isInBounds(row, minorDiagonalColumnIndexAtFirstRow)) {
+          accu += this.get(row)[minorDiagonalColumnIndexAtFirstRow--];
         }
-        return acc;
-      },0) > 1;
+      }
+      return accu > 1;
     },
 
     // test if any minor diagonals on this board contain conflicts

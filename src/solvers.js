@@ -50,7 +50,7 @@ window.countNRooksSolutions = function(n) {
 
   var recurse = function (rookCount, board, c) {
     if (rookCount === 0) {
-      _.each(board.rows(),function(r){console.log(r);});
+      // _.each(board.rows(),function(r){console.log(r);});
       solutionCount++;
       return true;
     } 
@@ -58,14 +58,9 @@ window.countNRooksSolutions = function(n) {
     for (var row = 0; row < n; row++) {
       board.togglePiece(row, c);
       if (!board.hasAnyRooksConflicts()) {
-        if ( recurse(rookCount-1, board, c+1) ) {
-          board.togglePiece(row, c);
-        } else {
-          break;
-        } 
-      } else {
-        board.togglePiece(row, c);
-      }
+       recurse(rookCount-1, board, c+1);
+      }         
+      board.togglePiece(row, c);
     }
     return true;
   };
