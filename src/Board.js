@@ -81,11 +81,9 @@
     hasRowConflictAt: function(rowIndex) {
       var row = this.get(rowIndex);
       var acc = 0;
-
       for (var i = 0; i < row.length; i++){
         acc += row[i];
       }
-
       return acc > 1;
     },
 
@@ -155,23 +153,6 @@
     // --------------------------------------------------------------
     //
     // test if a specific minor diagonal on this board contains a conflict
-    // hasMinorDiagonalConflictAt: function(minorDiagonalColumnIndexAtFirstRow) {
-    //   var length = this.get('n'),
-    //       accu = 0;
-    //   for (var i = 0; i < length; i++){
-    //     var startPos = minorDiagonalColumnIndexAtFirstRow;
-    //     accu = 0;
-    //     for(var row = i; row < length; row++) {
-    //       if(this._isInBounds(row, startPos)) {
-    //         accu += this.get(row)[startPos--];
-    //       }
-    //     }
-    //     if (accu > 1) return true;
-    //   }
-    //   return false;
-    // },
-
-
      hasMinorDiagonalConflictAt: function(minorDiagonalColumnIndexAtFirstRow) {
        var length = this.get('n'),
            accu = 0;
