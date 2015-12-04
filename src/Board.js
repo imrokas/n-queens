@@ -79,9 +79,14 @@
     //
     // test if a specific row on this board contains a conflict
     hasRowConflictAt: function(rowIndex) {
-      return this.get(rowIndex).reduce(function(acc,cur){
-        return acc + cur;
-      },0) > 1; 
+      var row = this.get(rowIndex);
+      var acc = 0;
+
+      for (var i = 0; i < row.length; i++){
+        acc += row[i];
+      }
+
+      return acc > 1;
     },
 
     // test if any rows on this board contain conflicts
